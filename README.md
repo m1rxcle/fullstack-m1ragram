@@ -1,50 +1,63 @@
-# Welcome to your Expo app 👋
+🌿 ##m1ragram
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+🚀 m1ragram — это мобильное приложение, похожее на Instagram, но с особым стилем! Оформление в черно-зеленых тонах делает его уникальным. Приложение написано на Expo React Native и работает как на iOS, так и на Android.
 
-## Get started
+🔥 Функциональность
 
-1. Install dependencies
+✅ Авторизация через Google (с помощью Clerk)✅ Добавление постов с фото и описанием✅ Комментарии и лайки ❤️✅ Уведомления о взаимодействиях 🔔✅ Истории, которые исчезают через 24 часа (как в Instagram)✅ Подписки и отписки на пользователей✅ Редактирование профиля ✏️
 
-   ```bash
-   npm install
-   ```
+🛠️ Технологии
 
-2. Start the app
+Frontend: React Native, CSS, TypeScriptBackend: Convex
 
-   ```bash
-    npx expo start
-   ```
+🔧 Основные библиотеки
 
-In the output, you'll find options to open the app in a
+@clerk/clerk-expo — авторизация через Google с помощью Clerk.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+convex — серверная логика и управление данными.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+@react-navigation/native и @react-navigation/bottom-tabs — навигация между экранами и вкладками.
 
-## Get a fresh project
+expo-image-picker — загрузка изображений из галереи и камеры.
 
-When you're ready, run:
+expo-file-system — работа с файлами на устройстве.
 
-```bash
-npm run reset-project
-```
+expo-secure-store — безопасное хранение данных.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+expo-haptics — тактильные эффекты для улучшения UX.
 
-## Learn more
+react-native-gesture-handler и react-native-reanimated — плавные жесты и анимации.
 
-To learn more about developing your project with Expo, look at the following resources:
+expo-splash-screen — кастомный экран загрузки приложения.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+date-fns — работа с датами и временем.
 
-## Join the community
+expo-status-bar — управление статус-баром устройства.
 
-Join our community of developers creating universal apps.
+🚀 Как запустить проект
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Склонируйте репозиторий:
+
+git clone https://github.com/yourusername/m1ragram.git
+
+Перейдите в папку проекта:
+
+cd m1ragram
+
+Установите зависимости:
+
+npm install
+
+Запустите приложение:
+
+expo start
+
+📸 Демо
+
+(Скриншоты пока недоступны, но скоро появятся!)
+
+💡 Особенности
+
+🔹 Стильный и минималистичный дизайн в черно-зеленых тонах 🎨🔹 Простая и удобная анимация взаимодействий🔹 Прямое подключение к Google OAuth через Clerk
+
+🎯 m1ragram — это отличная площадка для публикации фото и общения с друзьями. Поддержи проект, поставив ⭐ на GitHub!
