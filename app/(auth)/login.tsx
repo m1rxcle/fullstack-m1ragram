@@ -20,8 +20,6 @@ export default function Login() {
 
 			if (setActive && createdSessionId) {
 				setActive({ session: createdSessionId })
-				console.log("Сессия активирована")
-
 				router.replace("/(tabs)")
 			}
 		} catch (error) {
@@ -37,7 +35,7 @@ export default function Login() {
 					<Ionicons name="leaf" size={32} color={COLORS.primary} />
 				</View>
 				<Text style={styles.appName}>miragram</Text>
-				<Text style={styles.tagline}>don`t miss anything</Text>
+				<Text style={styles.tagline}>Не упускай ничего.</Text>
 			</View>
 			{/* Illustration */}
 			<View style={styles.illustrationContainer}>
@@ -49,7 +47,7 @@ export default function Login() {
 					<View style={styles.googleIconContainer}>
 						<Ionicons name="logo-google" size={20} color={COLORS.surface} />
 					</View>
-					<Text style={styles.googleButtonText}>Continue with Google</Text>
+					<Text style={styles.googleButtonText}>Войти через Google</Text>
 				</TouchableOpacity>
 				<Text style={styles.termsText}>By continue, you agree to our Terms and Privacy Policy</Text>
 			</View>

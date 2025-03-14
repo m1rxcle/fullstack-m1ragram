@@ -1,23 +1,20 @@
-import { FlatList, RefreshControl, Text, TouchableOpacity, View } from "react-native"
+import { FlatList, RefreshControl, Text, View } from "react-native"
 
 import { Ionicons } from "@expo/vector-icons"
 
 import { useQuery } from "convex/react"
 import { api } from "@/convex/_generated/api"
 
-import { useAuth } from "@clerk/clerk-expo"
-
 import Loader from "@/components/Loader"
 import Post from "@/components/Post"
 import StoriesSection from "@/components/StoriesSection"
-import NoPostsFound from "@/components/NoPostsFound"
+import NoPostsFound from "@/components/empty-pages/NoPostsFound"
 
 import { COLORS } from "@/constants/theme"
 import { styles } from "@/styles/feed.styles"
 import { useState } from "react"
 
 export default function Index() {
-	const { signOut } = useAuth()
 	const [refreshing, setRefreshing] = useState(false)
 
 	const posts = useQuery(api.posts.getFeedPosts)
@@ -38,9 +35,7 @@ export default function Index() {
 			{/* Header section */}
 			<View style={styles.header}>
 				<Text style={styles.headerTitle}>m1ragram</Text>
-				<TouchableOpacity onPress={() => signOut()}>
-					<Ionicons name="log-out-outline" size={24} color={COLORS.white} />
-				</TouchableOpacity>
+				<Ionicons name="leaf" size={24} color={COLORS.primary} />
 			</View>
 
 			<FlatList

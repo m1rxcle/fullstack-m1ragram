@@ -201,7 +201,7 @@ export const styles = StyleSheet.create({
 	input: {
 		flex: 1,
 		color: COLORS.white,
-		paddingVertical: 8,
+		paddingVertical: 12,
 		paddingHorizontal: 16,
 		marginRight: 12,
 		backgroundColor: COLORS.surface,

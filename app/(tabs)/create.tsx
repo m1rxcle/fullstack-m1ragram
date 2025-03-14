@@ -68,12 +68,12 @@ export default function CreateScreen() {
 					<TouchableOpacity onPress={() => router.back()}>
 						<Ionicons name="arrow-back" size={28} color={COLORS.primary} />
 					</TouchableOpacity>
-					<Text style={styles.headerTitle}>New Post</Text>
+					<Text style={styles.headerTitle}>Создать новый пост</Text>
 					<View style={{ width: 28 }} />
 				</View>
 				<TouchableOpacity style={styles.emptyImageContainer} onPress={pickImage}>
 					<Ionicons name="image-outline" size={48} color={COLORS.grey} />
-					<Text style={styles.emptyImageText}>Tap to select an image</Text>
+					<Text style={styles.emptyImageText}>Нажмите, чтобы добавить фото</Text>
 				</TouchableOpacity>
 			</View>
 		)
@@ -102,7 +102,7 @@ export default function CreateScreen() {
 						disabled={isSharing || !selectedImage}
 						onPress={handleShare}
 					>
-						{isSharing ? <ActivityIndicator size="small" color={COLORS.primary} /> : <Text style={styles.shareText}>Share</Text>}
+						{isSharing ? <ActivityIndicator size="small" color={COLORS.primary} /> : <Text style={styles.shareText}>Поделиться</Text>}
 					</TouchableOpacity>
 				</View>
 
@@ -113,7 +113,7 @@ export default function CreateScreen() {
 							<Image source={selectedImage} style={styles.previewImage} contentFit="cover" transition={200} />
 							<TouchableOpacity style={styles.changeImageButton} disabled={isSharing} onPress={pickImage}>
 								<Ionicons name="image-outline" size={20} color={COLORS.white} />
-								<Text style={styles.changeImageText}>Change</Text>
+								<Text style={styles.changeImageText}>Изменить</Text>
 							</TouchableOpacity>
 						</View>
 

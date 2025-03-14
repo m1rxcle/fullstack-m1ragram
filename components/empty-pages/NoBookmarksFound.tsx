@@ -16,7 +16,7 @@ export default function NoBookmarksFound() {
 					fontSize: 22,
 				}}
 			>
-				No bookmarked posts yet!
+				Еще нет закладок!
 			</Text>
 		</View>
 	)

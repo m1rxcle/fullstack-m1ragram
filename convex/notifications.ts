@@ -1,4 +1,5 @@
-import { query } from "./_generated/server"
+import { v } from "convex/values"
+import { mutation, query } from "./_generated/server"
 import { getAuthenticatedUser } from "./users"
 
 export const getNotifications = query({
@@ -39,5 +40,23 @@ export const getNotifications = query({
 		)
 
 		return notificationsWithInfo
+	},
+})
+
+export const clearNotifications = mutation({
+	handler: async (ctx, args) => {
+		const currentUser = await getAuthenticatedUser(ctx)
+
+		if (!currentUser) throw new Error("User not found")
+
+		const notifications = await ctx.db
+			.query("notifications")
+			.withIndex("by_receiver", (q) => q.eq("receiverId", currentUser._id))
+			.order("desc")
+			.collect()
+
+		for (const notification of notifications) {
+			await ctx.db.delete(notification._id)
+		}
 	},
 })

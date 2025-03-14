@@ -39,7 +39,7 @@ export default function CommentsModal({ postId, visible, onClose }: CommentProps
 					<TouchableOpacity onPress={onClose}>
 						<Ionicons name="close" size={24} color={COLORS.white} />
 					</TouchableOpacity>
-					<Text style={styles.modalTitle}>Comments</Text>
+					<Text style={styles.modalTitle}>Коментарии</Text>
 					<View style={{ width: 24 }} />
 				</View>
 				{comments === undefined ? (
@@ -62,7 +62,7 @@ export default function CommentsModal({ postId, visible, onClose }: CommentProps
 						multiline
 					/>
 					<TouchableOpacity disabled={!newComment.trim()} onPress={handleAddComment}>
-						<Text style={[styles.postButton, !newComment.trim() && styles.postButtonDisabled]}>Post</Text>
+						<Text style={[styles.postButton, !newComment.trim() && styles.postButtonDisabled]}>Написать</Text>
 					</TouchableOpacity>
 				</View>
 			</KeyboardAvoidingView>

@@ -1,5 +1,5 @@
 import Loader from "@/components/Loader"
-import NoPostsFound from "@/components/NoPostsFound"
+import NoPostsFound from "@/components/empty-pages/NoPostsFound"
 import { COLORS } from "@/constants/theme"
 import { api } from "@/convex/_generated/api"
 import { Doc } from "@/convex/_generated/dataModel"
@@ -74,15 +74,15 @@ export default function Profile() {
 						<View style={styles.statsContainer}>
 							<View style={styles.statItem}>
 								<Text style={styles.statNumber}>{currentUser.posts}</Text>
-								<Text style={styles.statLabel}>Posts</Text>
+								<Text style={styles.statLabel}>Публикации</Text>
 							</View>
 							<View style={styles.statItem}>
 								<Text style={styles.statNumber}>{currentUser.followers}</Text>
-								<Text style={styles.statLabel}>Followers</Text>
+								<Text style={styles.statLabel}>Подписчики</Text>
 							</View>
 							<View style={styles.statItem}>
 								<Text style={styles.statNumber}>{currentUser.following}</Text>
-								<Text style={styles.statLabel}>Following</Text>
+								<Text style={styles.statLabel}>Подписки</Text>
 							</View>
 						</View>
 					</View>
@@ -91,7 +91,7 @@ export default function Profile() {
 
 					<View style={styles.actionButtons}>
 						<TouchableOpacity style={styles.editButton} onPress={() => setIsEditModalVisible(true)}>
-							<Text style={styles.editButtonText}>Edit Profile</Text>
+							<Text style={styles.editButtonText}>Изменить профиль</Text>
 						</TouchableOpacity>
 						<TouchableOpacity style={styles.shareButton}>
 							<Ionicons name="share-outline" size={20} color={COLORS.white} />
@@ -119,13 +119,13 @@ export default function Profile() {
 					<KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.modalContainer}>
 						<View style={styles.modalContent}>
 							<View style={styles.modalHeader}>
-								<Text style={styles.modalTitle}>Edit Profile</Text>
+								<Text style={styles.modalTitle}>Изменить профиль</Text>
 								<TouchableOpacity onPress={() => setIsEditModalVisible(false)}>
 									<Ionicons name="close" size={24} color={COLORS.white} />
 								</TouchableOpacity>
 							</View>
 							<View style={styles.inputContainer}>
-								<Text style={styles.inputLabel}>Name</Text>
+								<Text style={styles.inputLabel}>Имя</Text>
 								<TextInput
 									style={styles.input}
 									value={editedProfile.fullname}
@@ -134,7 +134,7 @@ export default function Profile() {
 								/>
 							</View>
 							<View style={styles.inputContainer}>
-								<Text style={styles.inputLabel}>Bio</Text>
+								<Text style={styles.inputLabel}>Описание</Text>
 								<TextInput
 									style={[styles.input, styles.bioInput]}
 									value={editedProfile.bio}
@@ -145,7 +145,7 @@ export default function Profile() {
 								/>
 							</View>
 							<TouchableOpacity style={styles.saveButton} onPress={handleSaveProfile}>
-								<Text style={styles.saveButtonText}>Save Changes</Text>
+								<Text style={styles.saveButtonText}>Сохранить</Text>
 							</TouchableOpacity>
 						</View>
 					</KeyboardAvoidingView>

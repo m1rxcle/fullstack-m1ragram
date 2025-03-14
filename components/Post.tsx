@@ -119,7 +119,9 @@ export default function Post({ post }: PostProps) {
 				)}
 				{post.comments > 0 && (
 					<TouchableOpacity onPress={() => setShowComments(true)}>
-						<Text style={styles.commentsText}>View all {post.comments} commnents</Text>
+						<Text style={styles.commentsText}>
+							Посмотреть {post.comments} {post.comments > 1 ? "комментария" : "комментарий"}
+						</Text>
 					</TouchableOpacity>
 				)}
 

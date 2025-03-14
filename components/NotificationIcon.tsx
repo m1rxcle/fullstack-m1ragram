@@ -23,7 +23,7 @@ type NotificationProps = {
 			imageUrl: string
 		} | null
 
-		type: "like" | "follow" | "comment"
+		type: "like" | "follow" | "unfollow" | "comment"
 		comment: string | undefined
 		_creationTime: number
 	}
@@ -41,6 +41,8 @@ export default function NotificationIcon({ notification }: NotificationProps) {
 								<Ionicons name="heart" size={14} color={COLORS.primary} />
 							) : notification.type === "follow" ? (
 								<Ionicons name="person-add" size={14} color="#8B5CF6" />
+							) : notification.type === "unfollow" ? (
+								<Ionicons name="person-remove" size={14} color="#FF0000" />
 							) : (
 								<Ionicons name="chatbubble" size={14} color="#3B82F6" />
 							)}
@@ -57,10 +59,12 @@ export default function NotificationIcon({ notification }: NotificationProps) {
 
 					<Text style={styles.action}>
 						{notification.type === "follow"
-							? "started following you"
+							? "Подписался на вас"
 							: notification.type === "like"
-								? "liked your post"
-								: `commented: "${notification.comment}" `}
+								? "Лайкнул ваш пост"
+								: notification.type === "unfollow"
+									? "Отписался от вас"
+									: `Прокоментировал: "${notification.comment}" `}
 					</Text>
 					<Text style={styles.timeAgo}>{formatDistanceToNow(notification._creationTime, { addSuffix: true })}</Text>
 				</View>
