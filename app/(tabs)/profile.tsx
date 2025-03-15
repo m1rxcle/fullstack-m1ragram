@@ -13,6 +13,7 @@ import {
 } from "react-native"
 import { useState } from "react"
 
+import * as ImagePicker from "expo-image-picker"
 import { Image } from "expo-image"
 import { Ionicons } from "@expo/vector-icons"
 import { useAuth } from "@clerk/clerk-expo"
@@ -35,12 +36,14 @@ export default function Profile() {
 	const [isEditModalVisible, setIsEditModalVisible] = useState(false)
 
 	const [editedProfile, setEditedProfile] = useState({
+		image: currentUser?.image || "",
 		fullname: currentUser?.fullname || "",
 		bio: currentUser?.bio || "",
 	})
 
 	const [selectedPost, setSelectedPost] = useState<Doc<"posts"> | null>(null)
 	const [confirmSignOutModalVisible, setConfirmSignOutModalVisible] = useState(false)
+	const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
 	const posts = useQuery(api.posts.getPostByUser, {})
 
@@ -52,6 +55,19 @@ export default function Profile() {
 			setIsEditModalVisible(false)
 		} catch (error) {
 			console.log("Error updating profile: ", error)
+		}
+	}
+
+	const pickImage = async () => {
+		const result = await ImagePicker.launchImageLibraryAsync({
+			mediaTypes: "images",
+			allowsEditing: true,
+			aspect: [1, 1],
+			quality: 0.8,
+		})
+		if (!result.canceled) {
+			setSelectedImage(result.assets[0].uri)
+			setEditedProfile({ ...editedProfile, image: result.assets[0].uri })
 		}
 	}
 
@@ -129,6 +145,29 @@ export default function Profile() {
 								<Text style={styles.modalTitle}>Изменить профиль</Text>
 								<TouchableOpacity onPress={() => setIsEditModalVisible(false)}>
 									<Ionicons name="close" size={24} color={COLORS.white} />
+								</TouchableOpacity>
+							</View>
+							<View style={{ alignItems: "center" }}>
+								{!selectedImage ? (
+									<Image source={currentUser.image} style={styles.avatar} contentFit="cover" transition={200} />
+								) : (
+									<Image source={{ uri: selectedImage }} style={styles.avatar} contentFit="cover" transition={200} />
+								)}
+								<TouchableOpacity
+									style={{
+										marginTop: 10,
+										flexDirection: "row",
+										alignItems: "center",
+										gap: 10,
+										borderColor: COLORS.primary,
+										borderWidth: 2,
+										padding: 5,
+										borderRadius: 10,
+									}}
+									onPress={pickImage}
+								>
+									<Ionicons name="image-outline" size={20} color={COLORS.white} />
+									<Text style={{ color: COLORS.white }}>Изменить</Text>
 								</TouchableOpacity>
 							</View>
 							<View style={styles.inputContainer}>

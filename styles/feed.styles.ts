@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
 	storyWrapper: {
 		alignItems: "center",
 		marginHorizontal: 8,
-		width: 72,
+		width: 77,
 	},
 	storyRing: {
 		width: 68,

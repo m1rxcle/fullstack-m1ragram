@@ -60,13 +60,14 @@ export const getUserByClerkId = query({
 
 export const updateProfile = mutation({
 	args: {
+		image: v.string(),
 		fullname: v.string(),
 		bio: v.optional(v.string()),
 	},
 	handler: async (ctx, args) => {
 		const currentUser = await getAuthenticatedUser(ctx)
 
-		await ctx.db.patch(currentUser._id, { fullname: args.fullname, bio: args.bio })
+		await ctx.db.patch(currentUser._id, { image: args.image, fullname: args.fullname, bio: args.bio })
 	},
 })
 
@@ -130,6 +131,39 @@ export const toggleFollow = mutation({
 				type: "follow",
 			})
 		}
+	},
+})
+
+export const getFollowing = query({
+	handler: async (ctx) => {
+		const currentUser = await getAuthenticatedUser(ctx)
+
+		const following = await ctx.db
+			.query("follows")
+			.withIndex("by_follower", (q) => q.eq("followerId", currentUser._id))
+			.order("desc")
+			.collect()
+
+		const followingWithInfo = await Promise.all(
+			following.map(async (follow) => {
+				const following = await ctx.db.get(follow.followingId)
+				return {
+					...follow,
+					username: following?.username,
+					image: following?.image,
+				}
+			})
+		)
+		const result = [
+			{
+				_id: currentUser._id,
+				username: "Ваша история",
+				image: currentUser.image,
+			},
+			...followingWithInfo,
+		]
+
+		return result
 	},
 })
 
