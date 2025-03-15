@@ -12,7 +12,7 @@ export default function NoNotificationsFound() {
 					fontSize: 22,
 				}}
 			>
-				Нет никаких уведомлений!
+				Нет новых уведомлений.
 			</Text>
 		</View>
 	)

@@ -17,7 +17,7 @@ export default function Bookmarks() {
 	return (
 		<View style={styles.container}>
 			<View style={styles.header}>
-				<Text style={styles.headerTitle}>Закладки</Text>
+				<Text style={styles.headerTitle}>Заметки</Text>
 				<Ionicons name="leaf" size={24} color={COLORS.primary} />
 			</View>
 			{/* Post */}
