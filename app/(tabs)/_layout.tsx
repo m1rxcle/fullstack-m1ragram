@@ -69,7 +69,9 @@ export default function TabLayout() {
 					tabBarIcon: ({ size, color }) => {
 						if (!currentUser) return <Ionicons name="person-circle" size={size} color={color} />
 						return (
-							<Image source={currentUser.image} style={{ width: size, height: size, borderRadius: size / 2 }} contentFit="cover" transition={200} />
+							<View style={{ borderColor: COLORS.primary, borderWidth: 2, borderRadius: 100 }}>
+								<Image source={currentUser.image} style={{ width: size, height: size, borderRadius: size / 2 }} contentFit="cover" transition={200} />
+							</View>
 						)
 					},
 				}}

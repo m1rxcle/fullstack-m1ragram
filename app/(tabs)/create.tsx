@@ -96,13 +96,13 @@ export default function CreateScreen() {
 					>
 						<Ionicons name="close-outline" size={28} color={isSharing ? COLORS.grey : COLORS.white} />
 					</TouchableOpacity>
-					<Text style={styles.headerTitle}>New Post</Text>
+					<Text style={styles.headerTitle}>Новый пост</Text>
 					<TouchableOpacity
 						style={[styles.shareButton, isSharing && styles.shareButtonDisabled]}
 						disabled={isSharing || !selectedImage}
 						onPress={handleShare}
 					>
-						{isSharing ? <ActivityIndicator size="small" color={COLORS.primary} /> : <Text style={styles.shareText}>Поделиться</Text>}
+						{isSharing ? <ActivityIndicator size="small" color={COLORS.primary} /> : <Text style={styles.shareText}>Создать</Text>}
 					</TouchableOpacity>
 				</View>
 

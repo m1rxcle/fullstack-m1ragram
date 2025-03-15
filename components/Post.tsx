@@ -14,6 +14,7 @@ import { COLORS } from "@/constants/theme"
 import CommentsModal from "./CommentsModal"
 import { formatDistanceToNow } from "date-fns"
 import { useUser } from "@clerk/clerk-expo"
+import ConfirmModal from "./ConfirmModal"
 
 type PostProps = {
 	post: {
@@ -36,6 +37,7 @@ export default function Post({ post }: PostProps) {
 	const [isLiked, setIsLiked] = useState(false)
 	const [isBookmarked, setIsBookmarked] = useState(post.isBookmarked)
 	const [showComments, setShowComments] = useState(false)
+	const [showConfirmModal, setShowConfirmModal] = useState(false)
 
 	const toggleLike = useMutation(api.posts.toggleLike)
 	const toggleBookmark = useMutation(api.bookmarks.toggleBookmark)
@@ -78,7 +80,7 @@ export default function Post({ post }: PostProps) {
 				</Link>
 				{/* if im the owner, show the delete button */}
 				{post.author._id === currentUser?._id ? (
-					<TouchableOpacity onPress={handleDeletePost}>
+					<TouchableOpacity onPress={() => setShowConfirmModal(true)}>
 						<Ionicons name="trash-outline" size={20} color={COLORS.primary} />
 					</TouchableOpacity>
 				) : (
@@ -109,7 +111,7 @@ export default function Post({ post }: PostProps) {
 			{/* post info */}
 			<View style={styles.postInfo}>
 				<Text style={styles.likesText}>
-					{post.likes > 0 ? `${post.likes.toLocaleString()} ${post.likes > 1 ? "likes" : "like"} ` : "Be the first to like"}
+					{post.likes > 0 ? `${post.likes.toLocaleString()} ${post.likes > 1 ? "likes" : "like"} ` : "Никто не лайкнул"}
 				</Text>
 				{post.caption && (
 					<View style={styles.captionContainer}>
@@ -128,6 +130,15 @@ export default function Post({ post }: PostProps) {
 				<Text style={styles.timeAgo}>{formatDistanceToNow(post._creationTime, { addSuffix: true })}</Text>
 			</View>
 			<CommentsModal postId={post._id} visible={showComments} onClose={() => setShowComments(false)} />
+			<ConfirmModal
+				isVisible={showConfirmModal}
+				onConfirm={() => {
+					handleDeletePost()
+					setShowConfirmModal(false)
+				}}
+				title="Вы точно хотите удалить пост ?"
+				setCloseModal={() => setShowConfirmModal(false)}
+			/>
 		</View>
 	)
 }

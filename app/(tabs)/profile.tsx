@@ -1,14 +1,3 @@
-import Loader from "@/components/Loader"
-import NoPostsFound from "@/components/empty-pages/NoPostsFound"
-import { COLORS } from "@/constants/theme"
-import { api } from "@/convex/_generated/api"
-import { Doc } from "@/convex/_generated/dataModel"
-import { styles } from "@/styles/profile.styles"
-import { useAuth } from "@clerk/clerk-expo"
-import { Ionicons } from "@expo/vector-icons"
-import { useMutation, useQuery } from "convex/react"
-import { Image } from "expo-image"
-import { useState } from "react"
 import {
 	View,
 	Text,
@@ -22,6 +11,23 @@ import {
 	Platform,
 	TextInput,
 } from "react-native"
+import { useState } from "react"
+
+import { Image } from "expo-image"
+import { Ionicons } from "@expo/vector-icons"
+import { useAuth } from "@clerk/clerk-expo"
+
+import { Doc } from "@/convex/_generated/dataModel"
+import { api } from "@/convex/_generated/api"
+import { useMutation, useQuery } from "convex/react"
+
+import ConfirmModal from "@/components/ConfirmModal"
+import Loader from "@/components/Loader"
+import NoPostsFound from "@/components/empty-pages/NoPostsFound"
+import { COLORS } from "@/constants/theme"
+
+import { styles } from "@/styles/profile.styles"
+
 export default function Profile() {
 	const { signOut, userId } = useAuth()
 	const currentUser = useQuery(api.users.getUserByClerkId, userId ? { clerkId: userId } : "skip")
@@ -34,6 +40,7 @@ export default function Profile() {
 	})
 
 	const [selectedPost, setSelectedPost] = useState<Doc<"posts"> | null>(null)
+	const [confirmSignOutModalVisible, setConfirmSignOutModalVisible] = useState(false)
 
 	const posts = useQuery(api.posts.getPostByUser, {})
 
@@ -58,7 +65,7 @@ export default function Profile() {
 					<Text style={styles.username}>{currentUser.username}</Text>
 				</View>
 				<View style={styles.headerRight}>
-					<TouchableOpacity style={styles.headerIcon} onPress={() => signOut()}>
+					<TouchableOpacity style={styles.headerIcon} onPress={() => setConfirmSignOutModalVisible(true)}>
 						<Ionicons name="log-out-outline" size={24} color={COLORS.white} />
 					</TouchableOpacity>
 				</View>
@@ -166,6 +173,15 @@ export default function Profile() {
 					)}
 				</View>
 			</Modal>
+			<ConfirmModal
+				isVisible={confirmSignOutModalVisible}
+				setCloseModal={() => setConfirmSignOutModalVisible(false)}
+				title="Вы уверены, что хотите выйти?"
+				onConfirm={() => {
+					setConfirmSignOutModalVisible(false)
+					signOut()
+				}}
+			/>
 		</View>
 	)
 }
